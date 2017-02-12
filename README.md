@@ -50,7 +50,7 @@ Set `Virtual memory` like described here [https://www.elastic.co/guide/en/elasti
 sudo sysctl -w vm.max_map_count=262144
 ```
 
-Copy `docker-compose.yml` file in that instance.
+Copy `docker-compose.yml` file in that instance.  
 
 In the directory with this file execute command:
 ```

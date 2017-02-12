@@ -9,6 +9,8 @@ services:
       - "9200:9200"
       - "9300:9300"
     privileged: true
+    volumes:
+      - /elasticsearch-cluster/elasticsearch-data:/usr/share/elasticsearch/data
 #    sysctls:
 #      - vm.max_map_count=262144
 
