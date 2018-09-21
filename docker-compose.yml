@@ -9,19 +9,21 @@ services:
       - "9200:9200"
       - "9300:9300"
     privileged: true
-    volumes:
-      - /elasticsearch-cluster/elasticsearch-data:/usr/share/elasticsearch/data
+#    volumes:
+#      - /elasticsearch-cluster/hrono-elasticsearch-master/elasticsearch-data:/usr/share/elasticsearch/data
 #    sysctls:
 #      - vm.max_map_count=262144
 
   hrono-elasticsearch-slave:
     image: elasticsearch:5.6.12
-    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master"
+    command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master"
     environment:
       - ES_JAVA_OPTS=-Xmx1g -Xms1g
     links:
       - hrono-elasticsearch-master
     privileged: true
+#    volumes:
+#      - /elasticsearch-cluster/hrono-elasticsearch-slave/elasticsearch-data:/usr/share/elasticsearch/data
 #    sysctls:
 #      - vm.max_map_count=262144
 
