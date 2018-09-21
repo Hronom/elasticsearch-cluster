@@ -20,7 +20,7 @@ echo "Wait for Elasticsearch Head up ..."
 
 echo ""
 echo "Scale up to $1 nodes ..."
-sudo docker-compose scale hrono-elasticsearch-slave=$1
+sudo docker-compose up -d --scale hrono-elasticsearch-slave=$1
 
 echo ""
 echo "Wait for Elasticsearch ..."

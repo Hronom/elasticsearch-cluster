@@ -34,9 +34,9 @@ docker-compose down -v
 
 ### Scale
 ```
-docker-compose scale hrono-elasticsearch-slave=3
-docker-compose scale hrono-elasticsearch-slave=6
-docker-compose scale hrono-elasticsearch-slave=9
+docker-compose up -d --scale hrono-elasticsearch-slave=3
+docker-compose up -d --scale hrono-elasticsearch-slave=6
+docker-compose up -d --scale hrono-elasticsearch-slave=9
 ```
 
 # URL's

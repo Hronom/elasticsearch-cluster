@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   hrono-elasticsearch-master:
-    image: elasticsearch:5.3.0
+    image: elasticsearch:5.6.12
     command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=true -Enode.data=false -Ehttp.cors.enabled=true -Ehttp.cors.allow-origin=*"
     environment:
       - ES_JAVA_OPTS=-Xmx1g -Xms1g
@@ -15,7 +15,7 @@ services:
 #      - vm.max_map_count=262144
 
   hrono-elasticsearch-slave:
-    image: elasticsearch:5.3.0
+    image: elasticsearch:5.6.12
     command: "elasticsearch -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master"
     environment:
       - ES_JAVA_OPTS=-Xmx1g -Xms1g
@@ -26,7 +26,7 @@ services:
 #      - vm.max_map_count=262144
 
   hrono-kibana:
-    image: kibana:5.3.0
+    image: kibana:5.6.12
     ports:
       - "5601:5601"
     links:
