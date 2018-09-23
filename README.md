@@ -5,12 +5,12 @@ Docker Compose [how-to install](https://docs.docker.com/compose/install/)
 # Run using Docker Compose
 ### Run
 ```
-docker-compose up -d --remove-orphans
+docker-compose up -f elasticsearch-cluster-x -d --remove-orphans
 ```
 
 ### Down
 ```
-docker-compose down -v
+docker-compose -f elasticsearch-cluster-x down -v
 ```
 
 # URL's
@@ -28,7 +28,7 @@ Copy `docker-compose.yml` file in that instance.
 
 In the directory with this file execute command:
 ```
-sudo docker-compose up -d
+sudo docker-compose -f elasticsearch-cluster-x up -d
 ```
 
 Then you can try links described below to access cluster.

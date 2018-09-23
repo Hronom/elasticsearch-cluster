@@ -1,0 +1,139 @@
+version: '2.2'
+services:
+  hrono-elasticsearch-master-1-1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-master-1-1 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=true -Enode.data=false -Ehttp.cors.enabled=true -Ehttp.cors.allow-origin=* -Ecluster.routing.allocation.disk.threshold_enabled=false -Ecluster.routing.allocation.awareness.attributes=rack_id -Enode.attr.rack_id=1"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-master-1-1/elasticsearch-data:/usr/share/elasticsearch/data
+
+  # Group 1
+  hrono-elasticsearch-slave-1-1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-1-1 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=1"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-1-1/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-1-2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-1-2 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=1"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-1-2/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-1-3:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-1-3 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=1"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-1-3/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-1-4:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-1-4 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=1"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-1-4/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-1-5:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-1-5 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=1"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-1-5/elasticsearch-data:/usr/share/elasticsearch/data
+
+  # Group 2
+  hrono-elasticsearch-slave-2-1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-2-1 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=2"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-2-1/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-2-2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-2-2 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=2"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-2-2/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-2-3:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-2-3 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=2"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-2-3/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-2-4:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-2-4 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=2"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-2-4/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-elasticsearch-slave-2-5:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    command: "elasticsearch -Enode.name=hrono-elasticsearch-slave-2-5 -Enetwork.host=_site_ -Ecluster.name=hrono-cluster -Enode.master=false -Enode.data=true -Ediscovery.zen.ping.unicast.hosts=hrono-elasticsearch-master-1-1 -Ecluster.routing.allocation.disk.threshold_enabled=false -Enode.attr.rack_id=2"
+    environment:
+      - ES_JAVA_OPTS=-Xmx1g -Xms1g
+    links:
+      - hrono-elasticsearch-master-1-1
+    privileged: true
+    volumes:
+      - /elasticsearch-cluster-6/hrono-elasticsearch-slave-2-5/elasticsearch-data:/usr/share/elasticsearch/data
+
+  hrono-kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.0
+    ports:
+      - "5601:5601"
+    links:
+      - hrono-elasticsearch-master-1-1:elasticsearch
+
+  hrono-elasticsearch-head:
+    image: tobias74/elasticsearch-head:6
+    ports:
+      - "9100:9100"
+    links:
+      - hrono-elasticsearch-master-1-1
